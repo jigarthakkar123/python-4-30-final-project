@@ -1,0 +1,153 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Edit Product</title>
+	
+</head>
+<body class="animsition">
+	
+	
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{% static 'images/bg-01.jpg' %});">
+		<h2 class="ltext-105 cl0 txt-center">
+			Edit Product
+		</h2>
+	</section>	
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-10 p-b-116">
+		<div class="container">
+			<div class="flex-w flex-tr">
+				<div class="size-210 bor10 p-lr-70 p-t-5 p-b-70 p-lr-15-lg w-full-md">
+					{% if msg %}
+						<b style="color: blue;">{{msg}}</b>
+					{% endif %}
+					<form method="post" action="{% url 'seller-product-edit' pk=product.pk %}" enctype="multipart/form-data">
+						{% csrf_token %}
+						<h4 class="mtext-105 cl2 txt-center p-b-30">
+							Edit Product
+						</h4>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_category">
+								{% if product.product_category == "Men" %}
+									<option>---Select Category---</option>
+									<option value="Men" selected>Men</option>
+									<option value="Women">Women</option>
+									<option value="Kids">Kids</option>
+								{% elif product.product_category == "Women" %}
+									<option>---Select Category---</option>
+									<option value="Men">Men</option>
+									<option value="Women" selected>Women</option>
+									<option value="Kids">Kids</option>
+								{% elif product.product_category == "Kids" %}
+									<option>---Select Category---</option>
+									<option value="Men">Men</option>
+									<option value="Women">Women</option>
+									<option value="Kids" selected>Kids</option>
+								
+								{% endif %}
+								
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_brand">
+								{% if product.product_brand == "Levis" %}
+									<option>---Select Brand---</option>
+									<option value="Levis" selected>Levis</option>
+									<option value="Pape">Pape</option>
+									<option value="Killer">Killer</option>
+								{% elif product.product_brand == "Pape" %}
+									<option>---Select Brand---</option>
+									<option value="Levis">Levis</option>
+									<option value="Pape" selected>Pape</option>
+									<option value="Killer">Killer</option>
+								{% elif product.product_brand == "Killer" %}
+									<option>---Select Brand---</option>
+									<option value="Levis">Levis</option>
+									<option value="Pape">Pape</option>
+									<option value="Killer" selected>Killer</option>
+								{% endif %}
+								
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_size">
+								{% if product.product_size == "S" %}
+									<option>---Select Size---</option>
+									<option value="S" selected>S</option>
+									<option value="M">M</option>
+									<option value="L">L</option>
+									<option value="XL">XL</option>
+									<option value="XXL">XXL</option>
+								{% elif product.product_size == "M" %}
+									<option>---Select Size---</option>
+									<option value="S">S</option>
+									<option value="M" selected>M</option>
+									<option value="L">L</option>
+									<option value="XL">XL</option>
+									<option value="XXL">XXL</option>
+								{% elif product.product_size == "L" %}
+									<option>---Select Size---</option>
+									<option value="S">S</option>
+									<option value="M">M</option>
+									<option value="L" selected>L</option>
+									<option value="XL">XL</option>
+									<option value="XXL">XXL</option>
+								{% elif product.product_size == "XL" %}
+									<option>---Select Size---</option>
+									<option value="S">S</option>
+									<option value="M">M</option>
+									<option value="L">L</option>
+									<option value="XL" selected>XL</option>
+									<option value="XXL">XXL</option>
+								{% elif product.product_size == "XXL" %}
+									<option>---Select Size---</option>
+									<option value="S">S</option>
+									<option value="M">M</option>
+									<option value="L">L</option>
+									<option value="XL">XL</option>
+									<option value="XXL" selected>XXL</option>
+								{% endif %}
+								
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="product_name" value="{{product.product_name}}">
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="product_price" value="{{product.product_price}}">
+						</div>
+						
+
+						<div class="bor8 m-b-30">
+							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="product_desc">{{product.product_desc}}</textarea>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<img src="{{product.product_image.url}}" width="100px" height="100px">
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="product_image">
+						</div>
+						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
+							Update Product
+						</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</section>	
+	
+	
+	<!-- Map -->
+	<div class="map">
+		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="{% static 'images/icons/pin.png' %}" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+	</div>
+
+</body>
+</html>
+{% endblock %}

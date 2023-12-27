@@ -1,0 +1,93 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add Product</title>
+	
+</head>
+<body class="animsition">
+	
+	
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{% static 'images/bg-01.jpg' %});">
+		<h2 class="ltext-105 cl0 txt-center">
+			Add Product
+		</h2>
+	</section>	
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-10 p-b-116">
+		<div class="container">
+			<div class="flex-w flex-tr">
+				<div class="size-210 bor10 p-lr-70 p-t-5 p-b-70 p-lr-15-lg w-full-md">
+					{% if msg %}
+						<b style="color: blue;">{{msg}}</b>
+					{% endif %}
+					<form method="post" action="{% url 'seller-add-product' %}" enctype="multipart/form-data">
+						{% csrf_token %}
+						<h4 class="mtext-105 cl2 txt-center p-b-30">
+							Add Product
+						</h4>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_category">
+								<option>---Select Category---</option>
+								<option value="Men">Men</option>
+								<option value="Women">Women</option>
+								<option value="Kids">Kids</option>
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_brand">
+								<option>---Select Brand---</option>
+								<option value="Levis">Levis</option>
+								<option value="Pape">Pape</option>
+								<option value="Killer">Killer</option>
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<select class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="product_size">
+								<option>---Select Size---</option>
+								<option value="S">S</option>
+								<option value="M">M</option>
+								<option value="L">L</option>
+								<option value="XL">XL</option>
+								<option value="XXL">XXL</option>
+							</select>
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="product_name" placeholder="Your Product Name">
+						</div>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="product_price" placeholder="Your Product Price">
+						</div>
+						
+
+						<div class="bor8 m-b-30">
+							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="product_desc" placeholder="Product Description"></textarea>
+						</div>
+						
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="product_image">
+						</div>
+						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
+							Add Product
+						</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</section>	
+	
+	
+	<!-- Map -->
+	<div class="map">
+		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="{% static 'images/icons/pin.png' %}" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+	</div>
+
+</body>
+</html>
+{% endblock %}
